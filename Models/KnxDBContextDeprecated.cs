@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace KnxDataCollector.Models
 {
-    public partial class KnxDBContext : DbContext
+    public partial class KnxDBContextDeprecated : DbContext
     {
         //public KnxDBContext()
         //{
         //}
 
-        public KnxDBContext(DbContextOptions<KnxDBContext> options)
+        public KnxDBContextDeprecated(DbContextOptions<KnxDBContextDeprecated> options)
             : base(options)
         {
         }

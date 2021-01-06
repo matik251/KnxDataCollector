@@ -1,0 +1,71 @@
+﻿@model IEnumerable<KnxDataCollector.Model.KnxTelegrams>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TimestampS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Timestamp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FrameFormat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RawData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RawDataLength)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimestampS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Timestamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Service)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FrameFormat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RawData)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RawDataLength)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Tid">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Tid">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Tid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

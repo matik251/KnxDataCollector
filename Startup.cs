@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KnxDataCollector.Model;
 using KnxDataCollector.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,10 +30,20 @@ namespace KnxDataCollector
         {
             var connection = Configuration.GetConnectionString("KnxDB");
             services.AddDbContextPool<KnxDBContext>(options => options.UseSqlServer(connection));
-            services.AddCors(c =>
+            //services.AddCors(c =>
+            //{
+            //    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            //});
+
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
-            });
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
+            services.AddMvc(option => option.EnableEndpointRouting = false);
 
             services.AddControllers();
         }
@@ -49,7 +60,9 @@ namespace KnxDataCollector
 
             app.UseRouting();
 
-            app.UseCors(options => options.AllowAnyOrigin());
+            //app.UseCors(options => options.AllowAnyOrigin()) ;
+
+            app.UseCors("MyPolicy");
 
             app.UseAuthorization();
 
@@ -57,6 +70,9 @@ namespace KnxDataCollector
             {
                 endpoints.MapControllers();
             });
+
+
+            app.UseMvc();
 
         }
     }
