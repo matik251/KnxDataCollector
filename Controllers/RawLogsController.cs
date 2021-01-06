@@ -14,9 +14,9 @@ namespace KnxDataCollector.Controllers
     [ApiController]
     public class RawLogsController : ControllerBase
     {
-        private readonly KnxDBContext _context;
+        private readonly KnxDBContextDeprecated _context;
 
-        public RawLogsController(KnxDBContext context)
+        public RawLogsController(KnxDBContextDeprecated context)
         {
             _context = context;
         }

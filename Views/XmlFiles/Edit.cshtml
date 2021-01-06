@@ -1,0 +1,59 @@
+﻿@model KnxDataCollector.Model.XmlFiles
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>XmlFiles</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Fid" />
+            <div class="form-group">
+                <label asp-for="FileName" class="control-label"></label>
+                <input asp-for="FileName" class="form-control" />
+                <span asp-validation-for="FileName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Xmldata" class="control-label"></label>
+                <input asp-for="Xmldata" class="form-control" />
+                <span asp-validation-for="Xmldata" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsProcessed" class="control-label"></label>
+                <input asp-for="IsProcessed" class="form-control" />
+                <span asp-validation-for="IsProcessed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProcessingPercentage" class="control-label"></label>
+                <input asp-for="ProcessingPercentage" class="form-control" />
+                <span asp-validation-for="ProcessingPercentage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TelegramsCount" class="control-label"></label>
+                <input asp-for="TelegramsCount" class="form-control" />
+                <span asp-validation-for="TelegramsCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CancellationToken" class="control-label"></label>
+                <input asp-for="CancellationToken" class="form-control" />
+                <span asp-validation-for="CancellationToken" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

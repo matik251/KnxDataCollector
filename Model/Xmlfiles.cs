@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace KnxDataCollector.Model
 {
-    public partial class Xmlfiles
+    public partial class XmlFiles
     {
         public int Fid { get; set; }
         public string FileName { get; set; }
