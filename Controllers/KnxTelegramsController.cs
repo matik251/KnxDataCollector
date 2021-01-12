@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Cors;
 
 namespace KnxDataCollector.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/mvc/[controller]")]
     [ApiController]
     public class KnxTelegramsController : Controller
     {
