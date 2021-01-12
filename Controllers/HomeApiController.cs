@@ -25,6 +25,13 @@ namespace KnxDataCollector.Controllers
         public async Task<ActionResult<IEnumerable<Home>>> GetHome()
         {
             return await _context.Home.ToListAsync();
+            var result = await _context.Home.ToListAsync();
+
+            foreach (var element in result)
+            {
+                element.Time = DateTime.Now;
+            }
+            return result;
         }
 
         // GET: api/HomeApi/5
