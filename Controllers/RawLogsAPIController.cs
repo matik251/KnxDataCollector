@@ -5,58 +5,46 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using KnxDataCollector.Models;
-using Microsoft.AspNetCore.Cors;
+using KnxDataCollector.Model;
 
 namespace KnxDataCollector.Controllers
 {
-    [Route("api/mvc/[controller]")]
+    [Route("api/RawLogs")]
     [ApiController]
-    public class RawLogsController : ControllerBase
+    public class RawLogsAPIController : ControllerBase
     {
-        private readonly KnxDBContextDeprecated _context;
+        private readonly KnxDBContext _context;
 
-        public RawLogsController(KnxDBContextDeprecated context)
+        public RawLogsAPIController(KnxDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/RawLogs
+        // GET: api/RawLogsAPI
         [HttpGet]
-        [EnableCors("AllowOrigin")]
         public async Task<ActionResult<IEnumerable<RawLogs>>> GetRawLogs()
         {
-            //return await _context.RawLogs.ToListAsync();
-            var rawLogs = new RawLogs();
-            rawLogs.LogId = 1;
-            rawLogs.RawData = "0000000000000000000000000000";
-            var temp = new List<RawLogs>();
-            temp.Add(rawLogs);
-            var actionresultrawLogs = new ActionResult<IEnumerable<RawLogs>>(temp);
-            return actionresultrawLogs;
+            return await _context.RawLogs.ToListAsync();
         }
 
-        // GET: api/RawLogs/5
+        // GET: api/RawLogsAPI/5
         [HttpGet("{id}")]
-        [EnableCors("AllowOrigin")]
         public async Task<ActionResult<RawLogs>> GetRawLogs(int id)
         {
-            //var rawLogs = await _context.RawLogs.FindAsync(id);
+            var rawLogs = await _context.RawLogs.FindAsync(id);
 
-            //if (rawLogs == null)
-            //{
-            //    return NotFound();
-            //}
+            if (rawLogs == null)
+            {
+                return NotFound();
+            }
 
-            var rawLogs = new ActionResult<RawLogs>(new RawLogs());
             return rawLogs;
         }
 
-        // PUT: api/RawLogs/5
+        // PUT: api/RawLogsAPI/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        [EnableCors("AllowOrigin")]
         public async Task<IActionResult> PutRawLogs(int id, RawLogs rawLogs)
         {
             if (id != rawLogs.LogId)
@@ -85,11 +73,10 @@ namespace KnxDataCollector.Controllers
             return NoContent();
         }
 
-        // POST: api/RawLogs
+        // POST: api/RawLogsAPI
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        [EnableCors("AllowOrigin")]
         public async Task<ActionResult<RawLogs>> PostRawLogs(RawLogs rawLogs)
         {
             _context.RawLogs.Add(rawLogs);
@@ -98,9 +85,8 @@ namespace KnxDataCollector.Controllers
             return CreatedAtAction("GetRawLogs", new { id = rawLogs.LogId }, rawLogs);
         }
 
-        // DELETE: api/RawLogs/5
+        // DELETE: api/RawLogsAPI/5
         [HttpDelete("{id}")]
-        [EnableCors("AllowOrigin")]
         public async Task<ActionResult<RawLogs>> DeleteRawLogs(int id)
         {
             var rawLogs = await _context.RawLogs.FindAsync(id);
