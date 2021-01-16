@@ -24,16 +24,9 @@ namespace KnxDataCollector.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Home>>> GetHome()
         {
-<<<<<<< Updated upstream
-            return await _context.Home.ToListAsync();
             var result = await _context.Home.ToListAsync();
 
-            foreach (var element in result)
-=======
-            var result =  await _context.Home.ToListAsync();
-
             foreach(var element in result)
->>>>>>> Stashed changes
             {
                 element.Time = DateTime.Now;
             }
