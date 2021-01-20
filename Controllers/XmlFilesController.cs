@@ -30,6 +30,8 @@ namespace KnxDataCollector.Controllers
             return View(await _context.Xmlfiles.ToListAsync());
         }
 
+
+
         // GET: XmlFiles/Details/5
         [HttpGet("{id}")]
         [EnableCors("AllowOrigin")]
