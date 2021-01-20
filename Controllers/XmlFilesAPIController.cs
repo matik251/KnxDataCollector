@@ -14,10 +14,12 @@ namespace KnxDataCollector.Controllers
     public class XmlFilesAPIController : ControllerBase
     {
         private readonly KnxDBContext _context;
+        private Random _rnd;
 
         public XmlFilesAPIController(KnxDBContext context)
         {
             _context = context;
+            _rnd = new Random();
         }
 
         // GET: api/XmlFilesAPI
@@ -39,6 +41,20 @@ namespace KnxDataCollector.Controllers
             }
 
             return xmlFiles;
+        }
+
+        // GET: api/XmlFilesAPI/5
+        [HttpGet("/isProcessed={val}")]
+        public async Task<ActionResult<XmlFiles>> GetNotProcessedXmlFiles(int val)
+        {
+            var xmlFiles = await _context.Xmlfiles.ToListAsync();
+            if (xmlFiles == null)
+            {
+                return NotFound();
+            }
+            var notProcessedList = xmlFiles.Where(p => p.IsProcessed == val).ToList();
+
+            return notProcessedList[_rnd.Next(notProcessedList.Count())];
         }
 
         // PUT: api/XmlFilesAPI/5
