@@ -9,7 +9,7 @@ using KnxDataCollector.Model;
 
 namespace KnxDataCollector.Controllers
 {
-    [Route("api/XmlFiles")]
+    [Route("api/XmlFiles/[action]")]
     [ApiController]
     public class XmlFilesAPIController : ControllerBase
     {
@@ -44,15 +44,15 @@ namespace KnxDataCollector.Controllers
         }
 
         // GET: api/XmlFilesAPI/5
-        [HttpGet("/isProcessed={val}")]
-        public async Task<ActionResult<XmlFiles>> GetNotProcessedXmlFiles(int val)
+        [HttpGet]
+        public async Task<ActionResult<XmlFiles>> GetNotProcessedXmlFiles([FromQuery] bool isProcessed = false)
         {
             var xmlFiles = await _context.Xmlfiles.ToListAsync();
             if (xmlFiles == null)
             {
                 return NotFound();
             }
-            var notProcessedList = xmlFiles.Where(p => p.IsProcessed == val).ToList();
+            var notProcessedList = xmlFiles.Where(p => p.IsProcessed == Convert.ToInt32(isProcessed)).ToList();
 
             return notProcessedList[_rnd.Next(notProcessedList.Count())];
         }
