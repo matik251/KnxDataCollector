@@ -15,8 +15,10 @@ namespace KnxDataCollector.Model
         public string Service { get; set; }
         public string FrameFormat { get; set; }
         public string SourceAddress { get; set; }
-        public string DestinationAddress { get; set; }
+        public string GroupAddress { get; set; }
+        public string DeviceName { get; set; }
         public string Data { get; set; }
+        public float DataFloat { get; set; }
         public string SerializedData { get; set; }
     }
 }
