@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+
+// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
+// If you have enabled NRTs for your project, then un-comment the following line:
+// #nullable disable
+
+namespace KnxDataCollector.Model
+{
+    public partial class KnxGroupAddresses
+    {
+        public int Gid { get; set; }
+        public string GroupAddress { get; set; }
+        public string DeviceName { get; set; }
+        public string Length { get; set; }
+        public string Central { get; set; }
+        public string Clutch { get; set; }
+    }
+}

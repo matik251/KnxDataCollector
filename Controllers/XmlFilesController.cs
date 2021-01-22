@@ -27,7 +27,7 @@ namespace KnxDataCollector.Controllers
         [EnableCors("AllowOrigin")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Xmlfiles.ToListAsync());
+            return View(await _context.XmlFiles.ToListAsync());
         }
 
 
@@ -42,7 +42,7 @@ namespace KnxDataCollector.Controllers
                 return NotFound();
             }
 
-            var xmlFiles = await _context.Xmlfiles
+            var xmlFiles = await _context.XmlFiles
                 .FirstOrDefaultAsync(m => m.Fid == id);
             if (xmlFiles == null)
             {
@@ -78,7 +78,7 @@ namespace KnxDataCollector.Controllers
                 return NotFound();
             }
 
-            var xmlFiles = await _context.Xmlfiles.FindAsync(id);
+            var xmlFiles = await _context.XmlFiles.FindAsync(id);
             if (xmlFiles == null)
             {
                 return NotFound();
@@ -152,7 +152,7 @@ namespace KnxDataCollector.Controllers
 
         private bool XmlFilesExists(int id)
         {
-            return _context.Xmlfiles.Any(e => e.Fid == id);
+            return _context.XmlFiles.Any(e => e.Fid == id);
         }
     }
 }
