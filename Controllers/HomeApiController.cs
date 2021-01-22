@@ -53,7 +53,7 @@ namespace KnxDataCollector.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHome(int id, Home home)
         {
-            if (id != home.ID)
+            if (id != home.Id)
             {
                 return BadRequest();
             }
@@ -88,7 +88,7 @@ namespace KnxDataCollector.Controllers
             _context.Home.Add(home);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetHome", new { id = home.ID }, home);
+            return CreatedAtAction("GetHome", new { id = home.Id }, home);
         }
 
         // DELETE: api/HomeApi/5
@@ -109,7 +109,7 @@ namespace KnxDataCollector.Controllers
 
         private bool HomeExists(int id)
         {
-            return _context.Home.Any(e => e.ID == id);
+            return _context.Home.Any(e => e.Id == id);
         }
     }
 }

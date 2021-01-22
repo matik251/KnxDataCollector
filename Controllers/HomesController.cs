@@ -40,7 +40,7 @@ namespace KnxDataCollector.Controllers
             }
 
             var home = await _context.Home
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (home == null)
             {
                 return NotFound();
@@ -73,7 +73,7 @@ namespace KnxDataCollector.Controllers
 
         private bool HomeExists(int id)
         {
-            return _context.Home_1.Any(e => e.ID == id);
+            return _context.Home.Any(e => e.Id == id);
         }
     }
 }

@@ -26,14 +26,14 @@ namespace KnxDataCollector.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<XmlFiles>>> GetXmlfiles()
         {
-            return await _context.Xmlfiles.ToListAsync();
+            return await _context.XmlFiles.ToListAsync();
         }
 
         // GET: api/XmlFilesAPI/5
         [HttpGet("{id}")]
         public async Task<ActionResult<XmlFiles>> GetXmlFiles(int id)
         {
-            var xmlFiles = await _context.Xmlfiles.FindAsync(id);
+            var xmlFiles = await _context.XmlFiles.FindAsync(id);
 
             if (xmlFiles == null)
             {
@@ -47,7 +47,7 @@ namespace KnxDataCollector.Controllers
         [HttpGet]
         public async Task<ActionResult<XmlFiles>> GetNotProcessedXmlFiles([FromQuery] bool isProcessed = false)
         {
-            var xmlFiles = await _context.Xmlfiles.ToListAsync();
+            var xmlFiles = await _context.XmlFiles.ToListAsync();
             if (xmlFiles == null)
             {
                 return NotFound();
@@ -95,7 +95,7 @@ namespace KnxDataCollector.Controllers
         [HttpPost]
         public async Task<ActionResult<XmlFiles>> PostXmlFiles(XmlFiles xmlFiles)
         {
-            _context.Xmlfiles.Add(xmlFiles);
+            _context.XmlFiles.Add(xmlFiles);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetXmlFiles", new { id = xmlFiles.Fid }, xmlFiles);
@@ -105,13 +105,13 @@ namespace KnxDataCollector.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<XmlFiles>> DeleteXmlFiles(int id)
         {
-            var xmlFiles = await _context.Xmlfiles.FindAsync(id);
+            var xmlFiles = await _context.XmlFiles.FindAsync(id);
             if (xmlFiles == null)
             {
                 return NotFound();
             }
 
-            _context.Xmlfiles.Remove(xmlFiles);
+            _context.XmlFiles.Remove(xmlFiles);
             await _context.SaveChangesAsync();
 
             return xmlFiles;
@@ -119,7 +119,7 @@ namespace KnxDataCollector.Controllers
 
         private bool XmlFilesExists(int id)
         {
-            return _context.Xmlfiles.Any(e => e.Fid == id);
+            return _context.XmlFiles.Any(e => e.Fid == id);
         }
     }
 }
