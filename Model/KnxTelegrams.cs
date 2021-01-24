@@ -17,5 +17,6 @@ namespace KnxDataCollector.Model
         public string RawData { get; set; }
         public int? RawDataLength { get; set; }
         public string FileName { get; set; }
+        public int? Processed { get; set; }
     }
 }
