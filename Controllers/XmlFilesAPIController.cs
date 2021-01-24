@@ -45,14 +45,14 @@ namespace KnxDataCollector.Controllers
 
         // GET: api/XmlFilesAPI/5
         [HttpGet]
-        public async Task<ActionResult<XmlFiles>> GetNotProcessedXmlFiles([FromQuery] bool isProcessed = false)
+        public async Task<ActionResult<XmlFiles>> GetNotProcessedXmlFiles([FromQuery] int isProcessed)
         {
             var xmlFiles = await _context.XmlFiles.ToListAsync();
             if (xmlFiles == null)
             {
                 return NotFound();
             }
-            var notProcessedList = xmlFiles.Where(p => p.IsProcessed == Convert.ToInt32(isProcessed)).ToList();
+            var notProcessedList = xmlFiles.Where(p => p.IsProcessed >= Convert.ToInt32(isProcessed)).ToList();
 
             return notProcessedList[_rnd.Next(notProcessedList.Count())];
         }

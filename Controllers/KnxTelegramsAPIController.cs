@@ -9,7 +9,7 @@ using KnxDataCollector.Model;
 
 namespace KnxDataCollector.Controllers
 {
-    [Route("api/KnxTelegrams")]
+    [Route("api/KnxTelegrams/[action]")]
     [ApiController]
     public class KnxTelegramsAPIController : ControllerBase
     {
@@ -32,6 +32,20 @@ namespace KnxDataCollector.Controllers
         public async Task<ActionResult<KnxTelegrams>> GetKnxTelegrams(long id)
         {
             var knxTelegrams = await _context.KnxTelegrams.FindAsync(id);
+
+            if (knxTelegrams == null)
+            {
+                return NotFound();
+            }
+
+            return knxTelegrams;
+        }
+
+        // GET: api/KnxTelegramsAPI/GetNotProcessed
+        public async Task<ActionResult<KnxTelegrams>> GetNotProcessed()
+        {
+            var knxTelegrams = await _context.KnxTelegrams
+                .FirstOrDefaultAsync(p => p.Processed == null);
 
             if (knxTelegrams == null)
             {
