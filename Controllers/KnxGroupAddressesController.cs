@@ -47,9 +47,17 @@ namespace KnxDataCollector.Controllers
         {
             var knxGroupAddresses = await _context.KnxGroupAddresses.ToListAsync();
 
-            var knxGroupAddressesList = knxGroupAddresses.Where(p => p.GroupAddress == groupAddress).ToList();
+            var knxGroupAddressesList = knxGroupAddresses.Where(p => p.GroupAddress.Equals(groupAddress)).ToList();
 
             if (knxGroupAddresses == null)
+            {
+                if (knxGroupAddresses.Count < 1)
+                {
+                    return NotFound();
+                }
+            }
+
+            if(knxGroupAddressesList.Count < 1)
             {
                 return NotFound();
             }
